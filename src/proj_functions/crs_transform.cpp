@@ -29,15 +29,6 @@ point crs2crs_tranform(const char* source_cs, const char* target_cs,
 	b = proj_trans(P, PJ_FWD, a);
 	printf("easting: %.7f, northing: %.7f\n", b.enu.e, b.enu.n);
 
-	std::cout <<
-		"Coord X = " << b.enu.e <<
-		"	Coord Y = " << b.enu.n << 
-		"	Coord Z = " << b.enu.u <<
-		std::endl;
-
-	point p_export;
-	p_export.x = b.enu.e;
-	p_export.y = b.enu.n;
-	p_export.z = b.enu.u;
+	point p_export(b.enu.e, b.enu.n, b.enu.u);
 	return p_export;
 }
