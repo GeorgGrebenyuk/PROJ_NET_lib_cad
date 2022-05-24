@@ -29,5 +29,5 @@ public:
 #endif
 //typedef void(__stdcall* LogMessage)(const char*); -- for some log message .. or not
 extern "C" point PROJ_LIB_FUNCTIONS_API __stdcall crs2crs_tranform
-(const char* source_cs, const char* target_cs,
+(int source_cs_code, int target_cs_code,
 	double source_x, double source_y, double source_z);
