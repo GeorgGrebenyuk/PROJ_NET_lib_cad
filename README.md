@@ -2,8 +2,11 @@
 .NET Wrapper for OSGeo GDAL PROJ library and original library for using as external library for CAD-software (NanoCAD and etc, later)
 # What it is?
 Small .NET class with Platform Invoke method to run process of reproject points data (from CPP library using GDAL PROJ methods).  There are also proj.db in Releasws with Russian coordinate systems.
+## Structure of catalog
+- ".NET access" -- contains .NET class (wrapper);
+- "include" -- contains one header-file that declare external function of my lib;
+- "src" -- Visual Studio's solution directory - there are three VS projects (main lib and debug versions: cpp console app and c# console app);
 # How use?
-
 ## From C++
 Most comfortable way - do not use my "lib" and use original GDAL PROJ with [**these official instructions**](https://proj.org/development/quickstart.html).
 ## From C#
