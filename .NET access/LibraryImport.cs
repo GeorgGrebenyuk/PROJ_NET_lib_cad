@@ -42,8 +42,6 @@ namespace test_net
             }
         }
     }
-    [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)]
-    public delegate void LogMessage(string value);
 
     public interface ILibraryImport
     {
