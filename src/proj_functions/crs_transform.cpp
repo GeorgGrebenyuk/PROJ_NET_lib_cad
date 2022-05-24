@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "declare_functions.h"
+#include "../../include/declare_functions.h"
 #include <iostream>
 //#include <string.h>
 #include <string>
@@ -10,8 +10,8 @@ int32_t init_app()
 point crs2crs_tranform(int source_cs_code, int target_cs_code,
 	double source_x, double source_y, double source_z)
 {
-	std::cout << "source_cs" << source_cs_code << std::endl;
-	std::cout << "target_cs" << target_cs_code << std::endl;
+	//std::cout << "source_cs" << source_cs_code << std::endl;
+	//std::cout << "target_cs" << target_cs_code << std::endl;
 	PJ_CONTEXT* C;
 	PJ* P;
 	PJ* norm;
@@ -23,8 +23,8 @@ point crs2crs_tranform(int source_cs_code, int target_cs_code,
 	//const char *source_cs = epsg.c_str() + std::to_string(source_cs_code);
 	//const char* target_cs = "EPSG:" + target_cs_code;
 
-	std::cout << "source_cs" << source_cs << std::endl;
-	std::cout << "target_cs" << target_cs << std::endl;
+	//std::cout << "source_cs" << source_cs << std::endl;
+	//std::cout << "target_cs" << target_cs << std::endl;
 
 	C = proj_context_create();
 	P = proj_create_crs_to_crs(C,

@@ -168,7 +168,7 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="declare_functions.h" />
+    <ClInclude Include="..\..\include\declare_functions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

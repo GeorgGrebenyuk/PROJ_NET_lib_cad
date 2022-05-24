@@ -21,7 +21,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="declare_functions.h">
+    <ClInclude Include="..\..\include\declare_functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
