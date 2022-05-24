@@ -1,9 +1,15 @@
 # PROJ_NET_lib_cad
 .NET Wrapper for OSGeo GDAL PROJ library and original library for using as external library for CAD-software (NanoCAD and etc, later)
 # What it is?
-This repository contains two projects - original OSGeo GDAL PROJ lib (in C++) and custom .NET Standard library for some functions that lib and extended user interface to adding new parameters to internal database. Main purpose -- using as basic library in data-transformation in CAD systems (mainly - Russian's NanoCAD).
-.NET Library is need for plugin creation (because of standard NRX (C++ based API is difficult).
+Small .NET class with Platform Invoke method to run process of reproject points data (from CPP library using GDAL PROJ methods).  There are also proj.db in Releasws with Russian coordinate systems.
+# How use?
 
-# Что здесь?
-Данный репозиторий содержит 2 проекта - оригинальную библиотеку OSGeo GDAL PROJ lib (на C++) и пользовательскую на NET Standard с рядом функций из оригинальной библиотеки, а также методы для добавления новых определений в базу систем координат. Основная задача - использовать данную библиотеку в процессах трансформации данных в среде САПР (первоочередно в среде отечественной NanoCAD).
-Библиотека .NET нужна для создания плагинов, поскольку штатная поддержка C++ (в качестве NRX) затруднена.
+## From C++
+Most comfortable way - do not use my "lib" and use original GDAL PROJ with [these official instructions](https://proj.org/development/quickstart.html].
+## From C#
+1. Install proj.db to your system. Read [these instructions](https://proj.org/resource_files.html#where-are-proj-resource-files-looked-for).
+2. Unzip my cpp proj's lib (watch "proj_functions_ver-\*\*\*.zip" in Releases)
+3. Add class from**.NET access\LibraryImport.cs** to your application and set directory path to unzipped cpp library (watch "proj_functions_ver-\*\*\*.zip" in Releases) in DllImport argument. "point" structure is simply double-structure for simply process to return data from cpp lib.
+4. Use it!
+
+### Small videoguide
