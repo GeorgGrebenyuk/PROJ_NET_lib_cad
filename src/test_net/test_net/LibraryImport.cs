@@ -29,7 +29,6 @@ namespace test_net
     }
     public static class LibraryImport
     {
-        
         public static ILibraryImport Select()
         {
             if (IntPtr.Size != 4) // 32-bit application
@@ -42,7 +41,6 @@ namespace test_net
             }
         }
     }
-
     public interface ILibraryImport
     {
         point crs2crs_tranform(int source_cs, int target_cs, 
