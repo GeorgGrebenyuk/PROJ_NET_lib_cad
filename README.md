@@ -6,6 +6,7 @@ Small .NET class with Platform Invoke method to run process of reproject points 
 - ".NET access" -- contains .NET class (wrapper);
 - "include" -- contains one header-file that declare external function of my lib;
 - "src" -- Visual Studio's solution directory - there are three VS projects (main lib and debug versions: cpp console app and c# console app);
+- "dyn_proj_library" code for Autodesk Dynamo Core package ```dyn_proj_library```
 # How use?
 ## From C++
 Most comfortable way - do not use my "lib" and use original GDAL PROJ with [**these official instructions**](https://proj.org/development/quickstart.html).
