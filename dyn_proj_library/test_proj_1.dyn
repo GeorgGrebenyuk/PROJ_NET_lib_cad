@@ -47,7 +47,7 @@
         {
           "Id": "53920f7cb88740d4b01faefc924b1c74",
           "Name": "list",
-          "Description": "Список, который требуется отфильтровать.\n\nvar[]..[]",
+          "Description": "List to filter.\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -56,7 +56,7 @@
         {
           "Id": "f454b1927b584c459603485a34b65dcb",
           "Name": "mask",
-          "Description": "Список логических операций, представляющих маску.\n\nvar[]..[]",
+          "Description": "List of booleans representing a mask.\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -67,7 +67,7 @@
         {
           "Id": "af4781c69c7147f587fcd448387b5be7",
           "Name": "in",
-          "Description": "Элементы, индекс маски которых имеет значение «истина».",
+          "Description": "Items whose mask index is true.",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -76,7 +76,7 @@
         {
           "Id": "058a7e96eb3f4ed49b3098451189cecf",
           "Name": "out",
-          "Description": "Элементы, индекс маски которых имеет значение «ложь».",
+          "Description": "Items whose mask index is false.",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -84,7 +84,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Фильтрация последовательности путем поиска соответствующих индексов в отдельном списке логических операций.\n\nList.FilterByBoolMask (list: var[]..[], mask: var[]..[]): var[]..[]"
+      "Description": "Filters a sequence by looking up corresponding indices in a separate list of booleans.\n\nList.FilterByBoolMask (list: var[]..[], mask: var[]..[]): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -95,7 +95,7 @@
         {
           "Id": "aafa9fda8ff94f73a9eb21b15c8a73e8",
           "Name": "string",
-          "Description": "Строка, в которой требуется выполнить поиск\n\nstring",
+          "Description": "String to search in\n\nstring",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -104,7 +104,7 @@
         {
           "Id": "01adca4bf064493c8ff7bb12d9e0a646",
           "Name": "searchFor",
-          "Description": "Подстрока для поиска\n\nstring",
+          "Description": "Substring to search for\n\nstring",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -113,7 +113,7 @@
         {
           "Id": "6f81b8c4947347b0ad463d0a47909ad8",
           "Name": "ignoreCase",
-          "Description": "Определение того, учитывается ли при сравнении регистр\n\nbool\nЗначение по умолчанию : false",
+          "Description": "Whether or not comparison takes case into account\n\nbool\nDefault value : false",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -124,7 +124,7 @@
         {
           "Id": "0ca27d339fd644a09aef1cd1842343f8",
           "Name": "bool",
-          "Description": "Определение того, содержится ли в строке подстрока",
+          "Description": "Whether the string contains the substring",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -132,7 +132,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Определение того, содержит ли данная строка подстроку.\n\nString.Contains (string: string, searchFor: string, ignoreCase: bool = false): bool"
+      "Description": "Determines if the given string contains the given substring.\n\nString.Contains (string: string, searchFor: string, ignoreCase: bool = false): bool"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -144,7 +144,7 @@
         {
           "Id": "be4cfaf4807f4e6da2ba047f8824f910",
           "Name": "",
-          "Description": "Значение выражения в строке 1",
+          "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -152,7 +152,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+      "Description": "Allows for DesignScript code to be authored directly"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -163,7 +163,7 @@
         {
           "Id": "83bafef3cd104e43898ea8204cb151ad",
           "Name": "list",
-          "Description": "Список для поиска элемента.\n\nvar[]..[]",
+          "Description": "The list to find the element in.\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -172,7 +172,7 @@
         {
           "Id": "bd9b9f21b30e484faabb0093799c7637",
           "Name": "element",
-          "Description": "Элемент, индекс которого следует вернуть.\n\nvar",
+          "Description": "The element whose index is to be returned.\n\nvar",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -183,7 +183,7 @@
         {
           "Id": "c0e18cdbef15455397213d6465a33847",
           "Name": "int",
-          "Description": "Индекс элемента в списке. Если строгое соответствие не обнаружено, возвращается недопустимый индекс –1.",
+          "Description": "The index of the element in the list. Invalid index -1 will be returned if strict match not found.",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -191,7 +191,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Возврат индекса элемента в указанном списке. Между указанным списком и целевым элементом необходимо соблюдать строгое соответствие (то есть целое число должно соответствовать целому числу, двойное значение — двойному значению, строка — строке, объект — объекту и т. д.).\n\nList.IndexOf (list: var[]..[], element: var): int"
+      "Description": "Returns the index of the element in the given list. Match between given list and target element must be a strict match (i.e. int to int, double to double, string to string, object to object etc.)\n\nList.IndexOf (list: var[]..[], element: var): int"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -202,7 +202,7 @@
         {
           "Id": "e5b1b0b79e5f4fac8c4e0e61519e9495",
           "Name": "list",
-          "Description": "Список, из которого требуется извлечь элемент.\n\nvar[]..[]",
+          "Description": "List to fetch an item from.\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -211,7 +211,7 @@
         {
           "Id": "7180291064504198bf014bee5361ef16",
           "Name": "index",
-          "Description": "Индекс элемента для включения в выборку.\n\nint",
+          "Description": "Index of the item to be fetched.\n\nint",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -222,7 +222,7 @@
         {
           "Id": "2fcbdeed3af148869c050bdd64313830",
           "Name": "item",
-          "Description": "Элемент в списке по заданному индексу.",
+          "Description": "Item in the list at the given index.",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -230,7 +230,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Получение элемента из данного списка, расположенного по указанному индексу.\n\nList.GetItemAtIndex (list: var[]..[], index: int): var[]..[]"
+      "Description": "Returns an item from the given list that's located at the specified index.\n\nList.GetItemAtIndex (list: var[]..[], index: int): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -252,7 +252,7 @@
         {
           "Id": "d2eb40b710624f2f91bbaaca126847a3",
           "Name": "",
-          "Description": "Значение выражения в строке 1",
+          "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -260,7 +260,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+      "Description": "Allows for DesignScript code to be authored directly"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -338,7 +338,7 @@
         {
           "Id": "669662bef36f461a836b882d6c23b9ae",
           "Name": "",
-          "Description": "Значение выражения в строке 1",
+          "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -347,7 +347,7 @@
         {
           "Id": "13700bb2cd064ed68c1247f73756263a",
           "Name": "",
-          "Description": "Значение выражения в строке 2",
+          "Description": "Value of expression at line 2",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -355,7 +355,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+      "Description": "Allows for DesignScript code to be authored directly"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -366,7 +366,7 @@
         {
           "Id": "422c837e1098409f83efa3087d28c21e",
           "Name": "filePath",
-          "Description": "Файл CSV для преобразования в список\n\nstring",
+          "Description": "CSV file to be converted into a list\n\nstring",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -375,7 +375,7 @@
         {
           "Id": "0b884606f4e6471d85ca0834574b60b2",
           "Name": "transpose",
-          "Description": "Переключатель для переноса импортированных данных\n\nbool\nЗначение по умолчанию : false",
+          "Description": "Toggle to transpose the imported data\n\nbool\nDefault value : false",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -386,7 +386,7 @@
         {
           "Id": "cdbffb43662747b687b6da3c1b939519",
           "Name": "list",
-          "Description": "Список, в котором содержатся элементы в файле CSV",
+          "Description": "List containing the items in the CSV file",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -394,7 +394,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Импортирует данные из файла CSV (значения, разделенные запятыми), помещает элементы в список и, при необходимости, выполняет перенос.\n\nData.ImportCSV (filePath: string, transpose: bool = false): var[]..[]"
+      "Description": "Imports data from a CSV (comma separated values) file, put the items into a list and transpose it if needed.\n\nData.ImportCSV (filePath: string, transpose: bool = false): var[]..[]"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
@@ -415,7 +415,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Возможность выбрать файл в системе и получить путь к нему."
+      "Description": "Allows you to select a file on the system to get its file path."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -437,7 +437,7 @@
         {
           "Id": "e80e10c2ac1148618729e77657376414",
           "Name": "",
-          "Description": "Значение выражения в строке 1",
+          "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -446,7 +446,7 @@
         {
           "Id": "ff845b6287564d81801bb8e286762d70",
           "Name": "",
-          "Description": "Значение выражения в строке 2",
+          "Description": "Value of expression at line 2",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -454,7 +454,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+      "Description": "Allows for DesignScript code to be authored directly"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -628,7 +628,19 @@
     }
   ],
   "Dependencies": [],
-  "NodeLibraryDependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "dyn_proj_library",
+      "Version": "1.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "d8ce951026ac4cea90cfbd9b5a110a3f",
+        "cc20d7fd47fc4717b92433d523504542",
+        "da7c3e6cc95340388a2ba916c1f3fe72",
+        "3c8af5d9eb9845389059c8af7da5a892"
+      ]
+    }
+  ],
   "Thumbnail": "",
   "GraphDocumentationURL": null,
   "ExtensionWorkspaceData": [
@@ -641,7 +653,7 @@
   ],
   "Author": "",
   "Linting": {
-    "activeLinter": "Нет",
+    "activeLinter": "None",
     "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
     "warningCount": 0,
     "errorCount": 0
@@ -652,12 +664,12 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.12.1.8246",
+      "Version": "2.12.0.5650",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
     "Camera": {
-      "Name": "Фоновый просмотр",
+      "Name": "Background Preview",
       "EyeX": -17.0,
       "EyeY": 24.0,
       "EyeZ": 50.0,
@@ -829,7 +841,7 @@
         "Height": 394.46506522755874,
         "FontSize": 36.0,
         "InitialTop": 124.43619121042923,
-        "InitialHeight": 371.46506522755874,
+        "InitialHeight": 373.80251287597594,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -847,13 +859,13 @@
         "Height": 177.34979059366879,
         "FontSize": 36.0,
         "InitialTop": 670.09379377035907,
-        "InitialHeight": 154.34979059366879,
+        "InitialHeight": 159.64977706170828,
         "TextblockHeight": 43.0,
         "Background": "#FFA4E1FF"
       }
     ],
-    "X": -286.10363346979017,
-    "Y": -123.02758816752026,
-    "Zoom": 0.69990909121838818
+    "X": -2364.1858485036428,
+    "Y": -847.7045614124371,
+    "Zoom": 1.4596225598868591
   }
 }
