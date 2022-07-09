@@ -41,5 +41,7 @@ point crs2crs_tranform(int source_cs_code, int target_cs_code,
 	//printf("easting: %.7f, northing: %.7f\n", b.enu.e, b.enu.n);
 
 	point p_export(b.enu.e, b.enu.n, b.enu.u);
+	proj_destroy(P);
+	proj_context_destroy(C);
 	return p_export;
 }
