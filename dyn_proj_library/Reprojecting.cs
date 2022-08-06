@@ -46,10 +46,10 @@ namespace dyn_proj_library
             x -= dx;
             y -= dy;
             z -= dz;
-
-            x = x * Math.Cos(angle_value) - y * Math.Sin(angle_value);
-            y = x * Math.Sin(angle_value) + y * Math.Cos(angle_value);
-            this.recalced = new point(x * scale, y * scale, z * scale);
+            angle_value = angle_value * Math.PI / 180.0;
+            double x_new = x * Math.Cos(angle_value) - y * Math.Sin(angle_value);
+            double y_new = x * Math.Sin(angle_value) + y * Math.Cos(angle_value);
+            this.recalced = new point(x_new * scale, y_new * scale, z * scale);
         }
         /// <summary>
         /// Getting reproject point as three coordinates (double-values)
