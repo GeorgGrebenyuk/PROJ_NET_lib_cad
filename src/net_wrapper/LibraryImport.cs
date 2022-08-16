@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace test_net
+namespace proj_lib
 {
     /// <summary>
     /// Sctruct only for exporting data from extern cpp-function
@@ -27,37 +28,42 @@ namespace test_net
             this.z = z_input;
         }
     }
-    public static class LibraryImport
+    public class LibraryImport : IDisposable
     {
-        public static ILibraryImport Select()
-        {
-            if (IntPtr.Size != 4) // 32-bit application
-            {
-                return new LibraryImport_x64();
-            }
-            else // 64-bit application
-            {
-                return null;
-            }
-        }
-    }
-    public interface ILibraryImport
-    {
-        point crs2crs_tranform(int source_cs, int target_cs, 
+        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
+            EntryPoint = "crs2crs_tranform")]
+        private static extern point crs2crs_tranform(int source_cs, int target_cs,
             double source_x, double source_y, double source_z);
-
-    }
-    internal class LibraryImport_x64 : ILibraryImport
-    {
-        [DllImport(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\src\x64\Debug\proj_functions_x64",
-            CallingConvention = CallingConvention.StdCall, ExactSpelling = false, EntryPoint = "crs2crs_tranform")]
-        private static extern point crs2crs_tranform_internal(int source_cs, int target_cs, 
-            double source_x, double source_y, double source_z);
-
-        public point crs2crs_tranform(int source_cs, int target_cs, 
-            double source_x, double source_y, double source_z)
+        public List<point> transform_coords (int source_cs, int target_cs, List<point> points)
         {
-            return crs2crs_tranform_internal(source_cs, target_cs, source_x, source_y, source_z);
+            List<point> recalced = new List<point>();
+            foreach (point p in points)
+            {
+                recalced.Add(crs2crs_tranform(source_cs, target_cs, p.x, p.y, p.z));
+            }
+            return recalced;
         }
+        
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+            if (disposing)
+            {
+                // Освобождаем управляемые ресурсы
+            }
+            disposed = true;
+        }
+        ~LibraryImport()
+        {
+            Dispose(false);
+        }
+
     }
 }

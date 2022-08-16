@@ -80,9 +80,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib</OutDir>
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,14 +139,17 @@
       <AdditionalDependencies>proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)$(Platform)\$(Configuration)\libcrypto-1_1-x64.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcurl.dll" "$(SolutionDir)$(Platform)\$(Configuration)\libcurl.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libssl-1_1-x64.dll" "$(SolutionDir)$(Platform)\$(Configuration)\libssl-1_1-x64.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\proj_7_2.dll" "$(SolutionDir)$(Platform)\$(Configuration)\proj_7_2.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\sqlite3.dll" "$(SolutionDir)$(Platform)\$(Configuration)\sqlite3.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\tiff.dll" "$(SolutionDir)$(Platform)\$(Configuration)\tiff.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$(SolutionDir)$(Platform)\$(Configuration)\zlib.dll"</Command>
+      <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcurl.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcurl.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libssl-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libssl-1_1-x64.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\proj_7_2.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\proj_7_2.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\sqlite3.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\sqlite3.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\tiff.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\tiff.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zlib.dll"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>if not exist "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib" mkdir "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -166,6 +172,18 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
       <AdditionalDependencies>proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcurl.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcurl.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libssl-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libssl-1_1-x64.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\proj_7_2.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\proj_7_2.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\sqlite3.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\sqlite3.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\tiff.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\tiff.dll"
+copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zlib.dll"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>if not exist "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib" mkdir "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\declare_functions.h" />

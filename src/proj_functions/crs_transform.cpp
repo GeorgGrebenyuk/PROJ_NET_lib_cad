@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../../include/declare_functions.h"
+#include "declare_functions.h"
 #include <iostream>
 //#include <string.h>
 #include <string>
