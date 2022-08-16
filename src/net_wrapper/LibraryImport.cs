@@ -34,7 +34,7 @@ namespace proj_lib
             EntryPoint = "crs2crs_tranform")]
         private static extern point crs2crs_tranform(int source_cs, int target_cs,
             double source_x, double source_y, double source_z);
-        public List<point> transform_coords (int source_cs, int target_cs, List<point> points)
+        public List<point> transform_coords(int source_cs, int target_cs, List<point> points)
         {
             List<point> recalced = new List<point>();
             foreach (point p in points)
@@ -43,7 +43,7 @@ namespace proj_lib
             }
             return recalced;
         }
-        
+
         public void Dispose()
         {
             Dispose(true);
