@@ -10,12 +10,27 @@ namespace test_net
 {
     class Program
     {
+        static LibraryImport lib;
         static void Main(string[] args)
         {
             DateTime t1 = DateTime.Now;
-            LibraryImport lib = new LibraryImport();
-            int source_cs = 100564;
-            int target_cs = 4326;
+            lib = new LibraryImport();
+
+            //test_recalc();
+            test_get_info();
+
+
+            lib.Dispose();
+            DateTime t2 = DateTime.Now;
+
+            Console.WriteLine($"End!, time = {(t2-t1).TotalSeconds} s.");
+            Console.ReadKey();
+
+        }
+        static void test_recalc()
+        {
+            string source_cs = "Russia-MSK1964";
+            string target_cs = "WGS 84";
             string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_1964_1.csv");
 
             List<point> source_points = new List<point>();
@@ -34,12 +49,19 @@ namespace test_net
             //File.WriteAllText(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_1964_2.csv", SB.ToString());
 
             //Console.WriteLine($"x = {test_1.x}\ty = {test_1.y}\tz = {test_1.z}");
-            lib.Dispose();
-            DateTime t2 = DateTime.Now;
+        }
+        static void test_get_info()
+        {
+            //string source_cs = "Russia-MSK1964";
+            //string info = lib.get_proj_as_wkt(source_cs);
+            //Console.WriteLine(info);
 
-            Console.WriteLine($"End!, time = {(t2-t1).TotalSeconds} s.");
-            Console.ReadKey();
 
+            List<string> crs_all = lib.get_crs_names(15);
+            foreach (string cs in crs_all)
+            {
+                Console.WriteLine(cs);
+            }
         }
     }
 }

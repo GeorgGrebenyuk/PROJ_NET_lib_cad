@@ -193,6 +193,7 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="crs_transform.cpp" />
+    <ClCompile Include="db_tools.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
