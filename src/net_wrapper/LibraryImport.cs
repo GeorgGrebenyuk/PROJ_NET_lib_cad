@@ -57,7 +57,7 @@ namespace proj_lib
         //getting cs info
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_wkt")]
-        private static extern string getting_proj_as_wkt(string cs_name, int type);
+        private static extern string getting_proj_as_wkt(string cs_name); //, int type
         /// <summary>
         /// Получение WKT-кода для данного строчного наименования СК
         /// </summary>
@@ -66,22 +66,22 @@ namespace proj_lib
         /// WKT2_2019, WKT2_2018 = 2; WKT2_2019_SIMPLIFIED, PJ_WKT2_2019_SIMPLIFIED = 3;
         /// WKT1_GDAL = 4; WKT1_ESRI = 5</param>
         /// <returns></returns>
-        public string get_proj_as_wkt(string cs_name, int type)
+        public string get_proj_as_wkt(string cs_name) //, int type
         {
-            return getting_proj_as_wkt(cs_name, type);
+            return getting_proj_as_wkt(cs_name);
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_proj")]
-        private static extern string getting_proj_as_proj(string cs_name, int type);
+        private static extern string getting_proj_as_proj(string cs_name); //, int type
         /// <summary>
         /// Получение PROJ4-кода для данного строчного наименования СК
         /// </summary>
         /// <param name="cs_name">Строчное наименование СК</param>
         /// <param name="type">Тип вывода PROJ-кода: PROJ_5 = 0; PROJ_4 = 1</param>
         /// <returns></returns>
-        public string get_proj_as_proj(string cs_name, int type)
+        public string get_proj_as_proj(string cs_name) //, int type
         {
-            return getting_proj_as_proj(cs_name, type);
+            return getting_proj_as_proj(cs_name);
         }
         //for getting crs_names
         

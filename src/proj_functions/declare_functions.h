@@ -40,8 +40,8 @@ extern "C"
 	PROJ_LIB_FUNCTIONS_API point __stdcall crs2crs_tranform
 	(char* source_cs_name, char* target_cs_name, point source_point);
 
-	PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_wkt(char* cs_name, int type);
-	PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_proj(char* cs_name, int type);
+	PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_wkt(char* cs_name); //, int type
+	PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_proj(char* cs_name); //, int type
 
 	PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 	(int include_mode, char* file_path);

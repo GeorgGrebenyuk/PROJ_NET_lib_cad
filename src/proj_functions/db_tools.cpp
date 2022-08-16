@@ -9,7 +9,7 @@
 //{
 //
 //}
-PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_wkt(char* cs_name, int type)
+PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_wkt(char* cs_name) //, int type
 {
 	PJ_CONTEXT* C;
 	PJ* P;
@@ -17,14 +17,14 @@ PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_wkt(char* cs_name, int type)
 	C = proj_context_create();
 	P = proj_create(C, cs_name);
 
-	const char* wkt_code = proj_as_wkt(C, P, (PJ_WKT_TYPE)type, NULL);
+	const char* wkt_code = proj_as_wkt(C, P, PJ_WKT2_2019, NULL);
 	proj_destroy(P);
 	proj_context_destroy(C);
 	return (char*)wkt_code;
 
 
 }
-PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_proj(char* cs_name, int type)
+PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_proj(char* cs_name) //, int type
 {
 	PJ_CONTEXT* C;
 	PJ* P;
@@ -32,7 +32,7 @@ PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_proj(char* cs_name, int type)
 	C = proj_context_create();
 	P = proj_create(C, cs_name);
 
-	const char* proj_code = proj_as_proj_string (C, P, (PJ_PROJ_STRING_TYPE)type, NULL);
+	const char* proj_code = proj_as_proj_string (C, P, PJ_PROJ_4, NULL);
 	proj_destroy(P);
 	proj_context_destroy(C);
 	return (char*)proj_code;

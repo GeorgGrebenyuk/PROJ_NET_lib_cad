@@ -17,8 +17,8 @@ namespace test_net
             lib = new LibraryImport();
 
             //test_recalc();
-            //test_get_info();
-            create_new();
+            test_get_info();
+            //create_new();
 
             lib.Dispose();
             DateTime t2 = DateTime.Now;
@@ -53,8 +53,11 @@ namespace test_net
         static void test_get_info()
         {
             string source_cs = "Russia-MSK1964";
-            string info = lib.get_proj_as_wkt(source_cs, 1);
-            Console.WriteLine(info);
+            string info_wkt = lib.get_proj_as_wkt(source_cs);
+            Console.WriteLine("wkt= " + info_wkt);
+
+            //string info_proj = lib.get_proj_as_proj(source_cs, 1);
+            //Console.WriteLine("proj= " + info_proj);
 
 
             List<string> crs_all = lib.get_crs_names(9);
