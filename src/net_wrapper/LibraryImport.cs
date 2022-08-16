@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -55,66 +57,45 @@ namespace proj_lib
         //getting cs info
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_wkt")]
-        private static extern string getting_proj_as_wkt(string cs_name);
+        private static extern string getting_proj_as_wkt(string cs_name, int type);
         /// <summary>
         /// Получение WKT-кода для данного строчного наименования СК
         /// </summary>
         /// <param name="cs_name">Строчное наименование СК</param>
+        /// <param name="type">Тип вывода WKT-кода: WKT2_2015 = 0; WKT2_2015_SIMPLIFIED = 1;
+        /// WKT2_2019, WKT2_2018 = 2; WKT2_2019_SIMPLIFIED, PJ_WKT2_2019_SIMPLIFIED = 3;
+        /// WKT1_GDAL = 4; WKT1_ESRI = 5</param>
         /// <returns></returns>
-        public string get_proj_as_wkt(string cs_name)
+        public string get_proj_as_wkt(string cs_name, int type)
         {
-            return getting_proj_as_wkt(cs_name);
+            return getting_proj_as_wkt(cs_name, type);
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_proj")]
-        private static extern string getting_proj_as_proj(string cs_name);
+        private static extern string getting_proj_as_proj(string cs_name, int type);
         /// <summary>
         /// Получение PROJ4-кода для данного строчного наименования СК
         /// </summary>
         /// <param name="cs_name">Строчное наименование СК</param>
+        /// <param name="type">Тип вывода PROJ-кода: PROJ_5 = 0; PROJ_4 = 1</param>
         /// <returns></returns>
-        public string get_proj_as_proj(string cs_name)
+        public string get_proj_as_proj(string cs_name, int type)
         {
-            return getting_proj_as_proj(cs_name);
+            return getting_proj_as_proj(cs_name, type);
         }
         //for getting crs_names
-        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
-        EntryPoint = "get_all_crs_count")]
-        private static extern int geting_all_crs_count(int include_mode);
-        /// <summary>
-        /// Получение числа определений СК в базе данного типа (таблицы в proj.db)
-        /// </summary>
-        /// <param name="include_mode"></param>
-        /// <returns></returns>
-        private int get_all_crs_count (int include_mode)
-        {
-            return geting_all_crs_count(include_mode);
-        }
-        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
-        EntryPoint = "get_crs_name")]
-        private static extern void getting_crs_name(int include_mode, int counter, OutString data);
-        /// <summary>
-        /// Получение наименований всех СК входящих в базу данных из определенной таблицы
-        /// </summary>
-        /// <param name="mode">15 = projected_crs; 9 = geodetic_crs</param>
-        /// <returns></returns>
-        public List<string> get_crs_names (int mode)
-        {
-            //PJ_TYPE_PROJECTED_CRS = 15
-            //PJ_TYPE_GEODETIC_CRS = 9
-            List<string> crs = new List<string>();
-            int count_of_crs = this.get_all_crs_count(mode);
-            for (int i = 0; i < 50; i ++)
-            {
-                string name = "-";
-                getting_crs_name(mode, i, data=> name = data);
-                crs.Add(name);
-            }
-            return crs;
-        }
-
         
-
+        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
+        EntryPoint = "get_all_crs_names")]
+        private static extern int geting_all_crs_names(int include_mode, string file_path);
+        public List<string> get_crs_names(int mode)
+        {
+            string temp_path = Path.GetTempFileName();
+            int wait_process = geting_all_crs_names(mode, temp_path);
+            List<string> names = File.ReadAllLines(temp_path).ToList();
+            File.Delete(temp_path);
+            return names;
+        }
         public void Dispose()
         {
             Dispose(true);

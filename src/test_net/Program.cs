@@ -52,12 +52,12 @@ namespace test_net
         }
         static void test_get_info()
         {
-            //string source_cs = "Russia-MSK1964";
-            //string info = lib.get_proj_as_wkt(source_cs);
-            //Console.WriteLine(info);
+            string source_cs = "Russia-MSK1964";
+            string info = lib.get_proj_as_wkt(source_cs, 1);
+            Console.WriteLine(info);
 
 
-            List<string> crs_all = lib.get_crs_names(15);
+            List<string> crs_all = lib.get_crs_names(9);
             foreach (string cs in crs_all)
             {
                 Console.WriteLine(cs);
