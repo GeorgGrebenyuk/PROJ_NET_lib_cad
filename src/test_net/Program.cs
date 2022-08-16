@@ -17,8 +17,8 @@ namespace test_net
             lib = new LibraryImport();
 
             //test_recalc();
-            test_get_info();
-
+            //test_get_info();
+            create_new();
 
             lib.Dispose();
             DateTime t2 = DateTime.Now;
@@ -62,6 +62,14 @@ namespace test_net
             {
                 Console.WriteLine(cs);
             }
+        }
+        static void create_new()
+        {
+            string wkt_new_path = @"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\test_wkt_new.txt";
+            string wkt_row = File.ReadAllText(wkt_new_path);
+            //string errors = lib.create_crs_by_wkt(wkt_row);
+            
+            //Console.WriteLine(errors);
         }
     }
 }

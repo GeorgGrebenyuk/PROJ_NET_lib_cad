@@ -36,6 +36,7 @@ public:
 typedef void(__stdcall* OutString)(const char*);
 extern "C"
 {
+	//proj_create_from реализовать потом для выборки повторяющихся имен в БД
 	PROJ_LIB_FUNCTIONS_API point __stdcall crs2crs_tranform
 	(char* source_cs_name, char* target_cs_name, point source_point);
 
@@ -44,6 +45,8 @@ extern "C"
 
 	PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 	(int include_mode, char* file_path);
+	PROJ_LIB_FUNCTIONS_API char* __stdcall create_crs_by_wkt(char* wkt);
+
 }
 
 	

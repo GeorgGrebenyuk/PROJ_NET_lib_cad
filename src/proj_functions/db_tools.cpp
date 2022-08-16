@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 //char** get_all_geodetic_crs()
 //{
 //
@@ -59,5 +60,55 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 		for (char* name : names) { out << name << std::endl; }
 	}
 	out.close();
+
+	proj_context_destroy(C);
+	proj_get_crs_list_parameters_destroy(parameters);
+	proj_crs_info_list_destroy(info_crs);
 	return 1;
+}
+PROJ_LIB_FUNCTIONS_API char* __stdcall create_crs_by_wkt(char* wkt)
+{
+	PJ_CONTEXT* C = proj_context_create();
+	PROJ_STRING_LIST out_warnings = nullptr;
+	PROJ_STRING_LIST out_grammar_errors = nullptr;
+
+	PJ* p = proj_create_from_wkt(C, wkt, NULL, &out_warnings, &out_grammar_errors);
+	
+	std::stringstream ss;
+	std::ofstream out;
+	out.open("E:\\Temp\\err.txt");
+	if (p == NULL)
+	{
+		out << "null";
+		ss << "warnings" << std::endl;
+
+		PROJ_STRING_LIST iterator = NULL;
+		for (iterator = out_warnings; *iterator; iterator++)
+		{
+			ss << *iterator << std::endl;
+		}
+		ss << "wkt grammar errors" << std::endl;
+		for (iterator = out_grammar_errors; *iterator; iterator++)
+		{
+			ss << *iterator << std::endl;
+		}
+	}
+	else 
+	{
+		out << "ok";
+		ss << "-" << std::endl;
+	}
+	const char* errors = ss.str().c_str();
+	ss.clear();
+
+	
+	out.close();
+	
+	
+	proj_context_destroy(C);
+	proj_string_list_destroy(out_warnings);
+	proj_string_list_destroy(out_grammar_errors);
+	
+	return (char*)errors;
+	
 }

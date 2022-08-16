@@ -96,6 +96,39 @@ namespace proj_lib
             File.Delete(temp_path);
             return names;
         }
+        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
+        EntryPoint = "create_crs_by_wkt")]
+        private static extern string creation_crs_by_wkt(string wkt);
+        /// <summary>
+        /// Позволяет создать новое определение системы координат по строчному WKT-представлению.
+        /// </summary>
+        /// <param name="wkt">Строчное WKT-представление</param>
+        /// <param name="errors">Список с ошибками (опциональный)</param>
+        /// <returns>Список с ошибками если они были, или "-" если всё удачно</returns>
+        private string create_crs_by_wkt (string wkt)
+        {
+            string temp_path = Path.GetTempFileName();
+            string result = creation_crs_by_wkt(wkt);
+
+            //bool result_status;
+            //if (result == 0) 
+            //{
+            //    result_status = false;
+            //    //errors = errors_output;
+            //}
+            //else result_status = true;
+            return result;
+        }
+
+
+
+
+
+
+
+
+
+
         public void Dispose()
         {
             Dispose(true);
