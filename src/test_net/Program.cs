@@ -17,8 +17,8 @@ namespace test_net
             lib = new LibraryImport();
 
             //test_recalc();
-            test_get_info();
-            //create_new();
+            //test_get_info();
+            create_new();
 
             lib.Dispose();
             DateTime t2 = DateTime.Now;
@@ -52,27 +52,29 @@ namespace test_net
         }
         static void test_get_info()
         {
-            string source_cs = "Russia-MSK1964";
-            string info_wkt = lib.get_proj_as_wkt(source_cs);
+            string source_cs = "Russia-MSK01-Zona1";
+            string info_wkt = lib.get_proj_as_wkt(source_cs, 3);
             Console.WriteLine("wkt= " + info_wkt);
+            
+            string info_proj = lib.get_proj_as_proj(source_cs, 0);
+            Console.WriteLine("proj= " + info_proj);
 
-            //string info_proj = lib.get_proj_as_proj(source_cs, 1);
-            //Console.WriteLine("proj= " + info_proj);
-
-
+            /*
             List<string> crs_all = lib.get_crs_names(9);
             foreach (string cs in crs_all)
             {
                 Console.WriteLine(cs);
             }
+            */
         }
         static void create_new()
         {
             string wkt_new_path = @"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\test_wkt_new.txt";
             string wkt_row = File.ReadAllText(wkt_new_path);
-            //string errors = lib.create_crs_by_wkt(wkt_row);
-            
-            //Console.WriteLine(errors);
+            string errors = "";
+            bool success_trigger = lib.create_crs_by_wkt(wkt_row, ref errors);
+
+            Console.WriteLine(success_trigger + " " + errors);
         }
     }
 }

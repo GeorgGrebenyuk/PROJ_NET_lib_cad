@@ -57,7 +57,7 @@ namespace proj_lib
         //getting cs info
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_wkt")]
-        private static extern string getting_proj_as_wkt(string cs_name); //, int type
+        private static extern int getting_proj_as_wkt(char[] cs_name, OutString result, int type); //, int type
         /// <summary>
         /// Получение WKT-кода для данного строчного наименования СК
         /// </summary>
@@ -66,22 +66,26 @@ namespace proj_lib
         /// WKT2_2019, WKT2_2018 = 2; WKT2_2019_SIMPLIFIED, PJ_WKT2_2019_SIMPLIFIED = 3;
         /// WKT1_GDAL = 4; WKT1_ESRI = 5</param>
         /// <returns></returns>
-        public string get_proj_as_wkt(string cs_name) //, int type
+        public string get_proj_as_wkt(string cs_name, int type) //, int type
         {
-            return getting_proj_as_wkt(cs_name);
+            string result = "-";
+            int responce = getting_proj_as_wkt(cs_name.ToCharArray(), a=> result = a, type);
+            return result;
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_proj")]
-        private static extern string getting_proj_as_proj(string cs_name); //, int type
+        private static extern int getting_proj_as_proj(string cs_name, OutString result, int type); //
         /// <summary>
         /// Получение PROJ4-кода для данного строчного наименования СК
         /// </summary>
         /// <param name="cs_name">Строчное наименование СК</param>
         /// <param name="type">Тип вывода PROJ-кода: PROJ_5 = 0; PROJ_4 = 1</param>
         /// <returns></returns>
-        public string get_proj_as_proj(string cs_name) //, int type
+        public string get_proj_as_proj(string cs_name, int type) //, int type
         {
-            return getting_proj_as_proj(cs_name);
+            string result = "-";
+            int responce = getting_proj_as_proj(cs_name, a => result = a, type);
+            return result;
         }
         //for getting crs_names
         
@@ -98,26 +102,21 @@ namespace proj_lib
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "create_crs_by_wkt")]
-        private static extern string creation_crs_by_wkt(string wkt);
+        private static extern int creation_crs_by_wkt(string wkt, OutString errors);
         /// <summary>
         /// Позволяет создать новое определение системы координат по строчному WKT-представлению.
         /// </summary>
         /// <param name="wkt">Строчное WKT-представление</param>
         /// <param name="errors">Список с ошибками (опциональный)</param>
         /// <returns>Список с ошибками если они были, или "-" если всё удачно</returns>
-        private string create_crs_by_wkt (string wkt)
+        public bool create_crs_by_wkt (string wkt, ref string errors_out)
         {
             string temp_path = Path.GetTempFileName();
-            string result = creation_crs_by_wkt(wkt);
-
-            //bool result_status;
-            //if (result == 0) 
-            //{
-            //    result_status = false;
-            //    //errors = errors_output;
-            //}
-            //else result_status = true;
-            return result;
+            string errors = "";
+            int result = creation_crs_by_wkt(wkt, a => errors = a);
+            errors_out = errors;
+            if (result == 1) return true;
+            else return false;
         }
 
 

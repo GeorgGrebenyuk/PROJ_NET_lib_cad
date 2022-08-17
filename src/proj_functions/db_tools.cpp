@@ -9,33 +9,39 @@
 //{
 //
 //}
-PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_wkt(char* cs_name) //, int type
+PROJ_LIB_FUNCTIONS_API int __stdcall get_proj_as_wkt(char* cs_name, OutString result, int type)
 {
+	int result_status = 0;
+	std::string err = "error";
 	PJ_CONTEXT* C;
 	PJ* P;
+	std::cout << "input code= " << cs_name << std::endl;
 
 	C = proj_context_create();
 	P = proj_create(C, cs_name);
+	if (0 == P) return result_status;
+	result_status = 1;
 
-	const char* wkt_code = proj_as_wkt(C, P, PJ_WKT2_2019, NULL);
+	result(proj_as_wkt(C, P, (PJ_WKT_TYPE)type, NULL));
+
 	proj_destroy(P);
 	proj_context_destroy(C);
-	return (char*)wkt_code;
 
-
+	return result_status;
 }
-PROJ_LIB_FUNCTIONS_API char* __stdcall get_proj_as_proj(char* cs_name) //, int type
+PROJ_LIB_FUNCTIONS_API int __stdcall get_proj_as_proj(char* cs_name, OutString result, int type)
 {
 	PJ_CONTEXT* C;
 	PJ* P;
 
 	C = proj_context_create();
 	P = proj_create(C, cs_name);
+	if (0 == P) return 0;
 
-	const char* proj_code = proj_as_proj_string (C, P, PJ_PROJ_4, NULL);
+	result(proj_as_proj_string (C, P, (PJ_PROJ_STRING_TYPE)type, NULL));
 	proj_destroy(P);
 	proj_context_destroy(C);
-	return (char*)proj_code;
+	return 1;
 }
 
 PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
@@ -66,49 +72,41 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 	proj_crs_info_list_destroy(info_crs);
 	return 1;
 }
-PROJ_LIB_FUNCTIONS_API char* __stdcall create_crs_by_wkt(char* wkt)
+PROJ_LIB_FUNCTIONS_API int __stdcall create_crs_by_wkt(char* wkt, OutString errors)
 {
 	PJ_CONTEXT* C = proj_context_create();
 	PROJ_STRING_LIST out_warnings = nullptr;
 	PROJ_STRING_LIST out_grammar_errors = nullptr;
+	int code_out = 0;
 
 	PJ* p = proj_create_from_wkt(C, wkt, NULL, &out_warnings, &out_grammar_errors);
 	
 	std::stringstream ss;
-	std::ofstream out;
-	out.open("E:\\Temp\\err.txt");
 	if (p == NULL)
 	{
-		out << "null";
-		ss << "warnings" << std::endl;
+		//ss << "warnings" << std::endl;
 
-		PROJ_STRING_LIST iterator = NULL;
-		for (iterator = out_warnings; *iterator; iterator++)
-		{
-			ss << *iterator << std::endl;
-		}
-		ss << "wkt grammar errors" << std::endl;
-		for (iterator = out_grammar_errors; *iterator; iterator++)
-		{
-			ss << *iterator << std::endl;
-		}
+		for (auto iter = out_warnings; iter && *iter; ++iter)
+			ss << (*iter);
+		//ss << "wkt grammar errors" << std::endl;
+		for (auto iter = out_grammar_errors; iter && *iter; ++iter)
+			ss << (*iter);
+		code_out = 0; //false
 	}
 	else 
 	{
-		out << "ok";
-		ss << "-" << std::endl;
+		ss << "no errors" << std::endl;
+		code_out = 1; //true
 	}
-	const char* errors = ss.str().c_str();
+	errors(ss.str().c_str());
 	ss.clear();
-
-	
-	out.close();
+	std::cout << errors << std::endl;
 	
 	
 	proj_context_destroy(C);
 	proj_string_list_destroy(out_warnings);
 	proj_string_list_destroy(out_grammar_errors);
 	
-	return (char*)errors;
+	return code_out;
 	
 }
