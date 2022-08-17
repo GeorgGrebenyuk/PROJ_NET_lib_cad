@@ -7,8 +7,8 @@
     <ProjectGuid>{14588FFF-438A-4664-805F-ADA224CA2941}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>net_wrapper</RootNamespace>
-    <AssemblyName>net_wrapper</AssemblyName>
+    <RootNamespace>proj_wrapper</RootNamespace>
+    <AssemblyName>proj_wrapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace proj_lib
+namespace proj_wrapper
 {
     /// <summary>
     /// Sctruct only for exporting data from extern cpp-function
@@ -63,11 +63,21 @@ namespace proj_lib
         /// </summary>
         /// <param name="cs_name">Строчное наименование СК</param>
         /// <param name="type">Тип вывода WKT-кода: WKT2_2015 = 0; WKT2_2015_SIMPLIFIED = 1;
-        /// WKT2_2019, WKT2_2018 = 2; WKT2_2019_SIMPLIFIED, PJ_WKT2_2019_SIMPLIFIED = 3;
+        /// WKT2_2019, WKT2_2018 = 2; WKT2_2019_SIMPLIFIED, WKT2_2018_SIMPLIFIED = 3;
         /// WKT1_GDAL = 4; WKT1_ESRI = 5</param>
         /// <returns></returns>
-        public string get_proj_as_wkt(string cs_name, int type) //, int type
+        public string get_proj_as_wkt(string cs_name, string type_str) //, int type
         {
+            int type = 0;
+            if (type_str == "WKT1_GDAL") type = 4;
+            else if (type_str == "WKT1_ESRI") type = 5;
+            else if (type_str == "WKT2_2015") type = 0;
+            else if (type_str == "WKT2_2015_SIMPLIFIED") type = 1;
+            else if (type_str == "WKT2_2019") type = 2;
+            else if (type_str == "WKT2_2018") type = 2;
+            else if (type_str == "WKT2_2019_SIMPLIFIED") type = 3;
+            else if (type_str == "WKT2_2018_SIMPLIFIED") type = 3;
+
             string result = "-";
             int responce = getting_proj_as_wkt(cs_name.ToCharArray(), a=> result = a, type);
             return result;
@@ -81,8 +91,11 @@ namespace proj_lib
         /// <param name="cs_name">Строчное наименование СК</param>
         /// <param name="type">Тип вывода PROJ-кода: PROJ_5 = 0; PROJ_4 = 1</param>
         /// <returns></returns>
-        public string get_proj_as_proj(string cs_name, int type) //, int type
+        public string get_proj_as_proj(string cs_name, string type_str) //, int type
         {
+            int type = 0;
+            if (type_str == "PROJ_5") type = 0;
+            else if (type_str == "PROJ_4") type = 1;
             string result = "-";
             int responce = getting_proj_as_proj(cs_name, a => result = a, type);
             return result;
@@ -102,7 +115,7 @@ namespace proj_lib
             string temp_path = Path.GetTempFileName();
             int wait_process = geting_all_crs_names(mode, temp_path);
             List<string> names = File.ReadAllLines(temp_path).ToList();
-            File.Delete(temp_path);
+            //File.Delete(temp_path);
             return names;
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,

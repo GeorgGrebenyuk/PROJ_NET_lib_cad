@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\net_wrapper\net_wrapper.csproj">
-      <Project>{2bdf6dd7-30db-4424-8fb4-d851ab9049f2}</Project>
+      <Project>{14588fff-438a-4664-805f-ada224ca2941}</Project>
       <Name>net_wrapper</Name>
       <Private>False</Private>
     </ProjectReference>

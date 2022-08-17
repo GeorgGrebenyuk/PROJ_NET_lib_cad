@@ -49,11 +49,13 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 {
 	PJ_CONTEXT* C = proj_context_create();
 	PROJ_CRS_LIST_PARAMETERS* parameters = proj_get_crs_list_parameters_create();
-	const PJ_TYPE types[1] = { (PJ_TYPE)include_mode };
-
-	parameters->types = types;
+	PJ_TYPE type = (PJ_TYPE)include_mode; //(PJ_TYPE)include_mode;
+	//PJ_TYPE types[1] = { (PJ_TYPE)include_mode };
+	parameters->typesCount = 1;
+	parameters->types = &type;
 	int crs_counter = 0;
 	PROJ_CRS_INFO** info_crs = proj_get_crs_info_list_from_database(C, NULL, parameters, &crs_counter);
+	//crs_counter += 100;
 	std::vector<char*> names;
 	for (int i = 0; i < crs_counter; i++)
 	{
