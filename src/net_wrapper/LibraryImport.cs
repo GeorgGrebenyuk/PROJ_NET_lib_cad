@@ -92,6 +92,11 @@ namespace proj_lib
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_all_crs_names")]
         private static extern int geting_all_crs_names(int include_mode, string file_path);
+        /// <summary>
+        /// Получение наименований всех систем координат в базе данных
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <returns></returns>
         public List<string> get_crs_names(int mode)
         {
             string temp_path = Path.GetTempFileName();
