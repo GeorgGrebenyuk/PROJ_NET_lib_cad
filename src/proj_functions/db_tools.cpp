@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <sqlite3.h>
 //char** get_all_geodetic_crs()
 //{
 //
@@ -57,21 +58,50 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 	PROJ_CRS_INFO** info_crs = proj_get_crs_info_list_from_database(C, NULL, parameters, &crs_counter);
 	//crs_counter += 100;
 	std::vector<char*> names;
-	for (int i = 0; i < crs_counter; i++)
+	if (info_crs != NULL)
 	{
-		names.push_back(info_crs[i]->name);
+		for (int i = 0; i < crs_counter; i++)
+		{
+			names.push_back(info_crs[i]->name);
+		}
+		std::ofstream out;
+		out.open(file_path);
+		if (out.is_open())
+		{
+			for (char* name : names) { out << name << std::endl; }
+		}
+		out.close();
 	}
-	std::ofstream out;
-	out.open(file_path);
-	if (out.is_open())
-	{
-		for (char* name : names) { out << name << std::endl; }
-	}
-	out.close();
+
+
 
 	proj_context_destroy(C);
 	proj_get_crs_list_parameters_destroy(parameters);
 	proj_crs_info_list_destroy(info_crs);
+	return 1;
+}
+PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names2(char* db_path, char* file_path)
+{
+	//std::vector<char*> names;
+	sqlite3* db;
+	sqlite3_stmt* stmt;
+	if (sqlite3_open(db_path, &db) == SQLITE_OK)
+	{
+		std::ofstream out;
+		out.open(file_path);
+		sqlite3_prepare(db, "SELECT name from crs_view;", -1, &stmt, NULL);//preparing the statement
+		sqlite3_step(stmt);//executing the statement
+		char* str = (char*)sqlite3_column_text(stmt, 0);
+		while (sqlite3_column_text(stmt, 0))
+		{
+			auto el = (char*)sqlite3_column_text(stmt, 0);
+			out << el << std::endl;
+			sqlite3_step(stmt);
+		
+		}
+		sqlite3_close(db);
+		out.close();
+	}
 	return 1;
 }
 PROJ_LIB_FUNCTIONS_API int __stdcall create_crs_by_wkt(char* wkt, OutString errors)

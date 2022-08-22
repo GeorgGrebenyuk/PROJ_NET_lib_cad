@@ -52,14 +52,14 @@ namespace test_net
         }
         static void test_get_info()
         {
-            /*
-            string source_cs = "Russia-MSK01-Zona1";
-            string info_wkt = lib.get_proj_as_wkt(source_cs, "3");
-            Console.WriteLine("wkt= " + info_wkt);
             
-            string info_proj = lib.get_proj_as_proj(source_cs, "0");
-            Console.WriteLine("proj= " + info_proj);
-            */
+            //string source_cs = "Ukraine-SK63-X_Zona1";
+            //string info_wkt = lib.get_proj_as_wkt(source_cs, "3");
+            //Console.WriteLine("wkt= " + info_wkt);
+            
+            //string info_proj = lib.get_proj_as_proj(source_cs, "0");
+            //Console.WriteLine("proj= " + info_proj);
+            
 
             List<string> crs_all = lib.get_crs_names(15);
             foreach (string cs in crs_all)

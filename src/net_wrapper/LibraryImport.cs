@@ -34,6 +34,7 @@ namespace proj_wrapper
     {
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)]
         public delegate void OutString(string value);
+        public static string db_path_default = $@"C:\Users\{Environment.UserName}\AppData\Local\proj\proj.db";
 
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
             EntryPoint = "crs2crs_tranform")]
@@ -105,6 +106,9 @@ namespace proj_wrapper
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_all_crs_names")]
         private static extern int geting_all_crs_names(int include_mode, string file_path);
+        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
+        EntryPoint = "get_all_crs_names2")]
+        private static extern int geting_all_crs_names2(string dp_path, string file_path);
         /// <summary>
         /// Получение наименований всех систем координат в базе данных
         /// </summary>
@@ -113,7 +117,7 @@ namespace proj_wrapper
         public List<string> get_crs_names(int mode)
         {
             string temp_path = Path.GetTempFileName();
-            int wait_process = geting_all_crs_names(mode, temp_path);
+            int wait_process = geting_all_crs_names2(db_path_default, temp_path); //geting_all_crs_names(mode, temp_path);
             List<string> names = File.ReadAllLines(temp_path).ToList();
             //File.Delete(temp_path);
             return names;

@@ -130,14 +130,14 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\include;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sqlite3.lib;proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
@@ -162,7 +162,7 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\include;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,8 +170,8 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sqlite3.lib;proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
@@ -187,11 +187,13 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="aux_functions.hpp" />
     <ClInclude Include="declare_functions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aux_functions.cpp" />
     <ClCompile Include="crs_transform.cpp" />
     <ClCompile Include="db_tools.cpp" />
     <ClCompile Include="dllmain.cpp" />
