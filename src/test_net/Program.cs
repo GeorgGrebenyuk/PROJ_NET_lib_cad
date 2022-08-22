@@ -16,8 +16,8 @@ namespace test_net
             DateTime t1 = DateTime.Now;
             lib = new LibraryImport();
 
-            //test_recalc();
-            test_get_info();
+            test_recalc();
+            //test_get_info();
             //create_new();
 
             lib.Dispose();
@@ -30,21 +30,22 @@ namespace test_net
         static void test_recalc()
         {
             string source_cs = "Russia-MSK1964";
-            string target_cs = "WGS 84";
+            string target_cs = "WGS 84 / UTM zone 36N";
             string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_1964_1.csv");
 
-            List<point> source_points = new List<point>();
+            List<double[]> source_points = new List<double[]>();
             foreach (string cs_row in cs_1)
             {
                 double[] coords_row = cs_row.Split(',').Select(a => Double.Parse(a)).ToArray();
-                source_points.Add(new point(coords_row[0], coords_row[1], 0));
+
+                source_points.Add(coords_row);
             }
-            List<point> target_points = lib.transform_coords(source_cs, target_cs, source_points);
+            List<double[]> target_points = lib.transform_coords(source_cs, target_cs, source_points);
             StringBuilder SB = new StringBuilder();
-            foreach (point p in target_points)
+            foreach (double[] p in target_points)
             {
                 //SB.AppendLine($"{p.x};{p.y}");
-                Console.WriteLine($"x = {p.x}\ty = {p.y}\tz = {p.z}");
+                Console.WriteLine($"x = {p[0]}\ty = {p[1]}\tz = {p[2]}");
             }
             //File.WriteAllText(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_1964_2.csv", SB.ToString());
 

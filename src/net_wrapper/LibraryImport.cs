@@ -46,12 +46,13 @@ namespace proj_wrapper
         /// <param name="target_cs_name">Наименование целевой СК</param>
         /// <param name="points">Список с точками (структура point этой библиотеки)</param>
         /// <returns></returns>
-        public List<point> transform_coords(string source_cs_name, string target_cs_name, List<point> points)
+        public List<double[]> transform_coords(string source_cs_name, string target_cs_name, List<double[]> points)
         {
-            List<point> recalced = new List<point>();
-            foreach (point p in points)
+            List<double[]> recalced = new List<double[]>();
+            foreach (double[] p in points)
             {
-                recalced.Add(crs2crs_tranform(source_cs_name, target_cs_name, p));
+                point recalced_point = crs2crs_tranform(source_cs_name, target_cs_name, new point(p[0], p[1], p[2]));
+                recalced.Add(new double[3] { recalced_point.x, recalced_point.y, recalced_point.z });
             }
             return recalced;
         }
