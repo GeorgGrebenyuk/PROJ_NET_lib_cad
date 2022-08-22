@@ -25,6 +25,8 @@ More info you can find at [official PROJ docs](https://proj.org/resource_files.h
 # How use?
 ## Firstly!
 Install proj.db to tour OS: unpack last ```PROJ_lib_ver-***_***.zip``` from [releases](https://github.com/GeorgGrebenyuk/PROJ_NET_lib_cad/releases) to folder ```%LOCALAPPDATA%\proj```
+
+**Last version is that file ([archive](https://github.com/GeorgGrebenyuk/PROJ_NET_lib_cad/releases/download/v1.1.0/PROJ_lib_ver-7.2.1_1.1.0.zip))**.
 ## From C++
 Most comfortable way - do not use my "lib" and use original GDAL PROJ with [**these official instructions**](https://proj.org/development/quickstart.html).
 ## From C#
