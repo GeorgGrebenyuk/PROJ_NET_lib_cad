@@ -29,9 +29,10 @@ namespace test_net
         }
         static void test_recalc()
         {
-            string source_cs = "Russia-MSK1964";
-            string target_cs = "WGS 84 / UTM zone 36N";
-            string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_1964_1.csv");
+            DateTime start = DateTime.Now;
+            string source_cs = "WGS 84";
+            string target_cs = "Russia-MSK1964";
+            string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_4326-nerovnosti.txt");
 
             List<double[]> source_points = new List<double[]>();
             foreach (string cs_row in cs_1)
@@ -42,6 +43,8 @@ namespace test_net
             }
             List<double[]> target_points = lib.transform_coords(source_cs, target_cs, source_points);
             StringBuilder SB = new StringBuilder();
+            DateTime end = DateTime.Now;
+            Console.WriteLine($"time = {(end-start).TotalSeconds} s.");
             foreach (double[] p in target_points)
             {
                 //SB.AppendLine($"{p.x};{p.y}");

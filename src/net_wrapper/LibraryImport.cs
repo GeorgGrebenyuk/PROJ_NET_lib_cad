@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace proj_wrapper
 {
@@ -38,7 +39,7 @@ namespace proj_wrapper
 
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
             EntryPoint = "crs2crs_tranform")]
-        private static extern point crs2crs_tranform(string source_cs, string target_cs, point p);
+        private static extern int crs2crs_tranform(string source_cs, string target_cs, string file_path);
         /// <summary>
         /// Получение списка пересчитанных координат из одной системы в другую
         /// </summary>
@@ -49,17 +50,28 @@ namespace proj_wrapper
         public List<double[]> transform_coords(string source_cs_name, string target_cs_name, List<double[]> points)
         {
             List<double[]> recalced = new List<double[]>();
+            string temp_file_path = Path.GetTempFileName();
+            StringBuilder SB = new StringBuilder();
             foreach (double[] p in points)
             {
-                point recalced_point = crs2crs_tranform(source_cs_name, target_cs_name, new point(p[0], p[1], p[2]));
-                recalced.Add(new double[3] { recalced_point.x, recalced_point.y, recalced_point.z });
+                SB.AppendLine($"{p[0]},{p[1]},{p[2]}");
             }
+            File.WriteAllText(temp_file_path, SB.ToString());
+            SB.Clear();
+            int wait_process = crs2crs_tranform(source_cs_name, target_cs_name, temp_file_path);
+            List<string> file = File.ReadAllLines(temp_file_path).ToList();
+            foreach (string str in file)
+            {
+                double[] arr = str.Split(',').Select(a => Double.Parse(a)).ToArray();
+                recalced.Add(arr);
+            }
+            File.Delete(temp_file_path);
             return recalced;
         }
         //getting cs info
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_proj_as_wkt")]
-        private static extern int getting_proj_as_wkt(char[] cs_name, OutString result, int type); //, int type
+        private static extern int getting_proj_as_wkt(string cs_name, OutString result, int type); //, int type
         /// <summary>
         /// Получение WKT-кода для данного строчного наименования СК
         /// </summary>
@@ -81,7 +93,7 @@ namespace proj_wrapper
             else if (type_str == "WKT2_2018_SIMPLIFIED") type = 3;
 
             string result = "-";
-            int responce = getting_proj_as_wkt(cs_name.ToCharArray(), a=> result = a, type);
+            int responce = getting_proj_as_wkt(cs_name, a=> result = a, type);
             return result;
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
@@ -120,7 +132,7 @@ namespace proj_wrapper
             string temp_path = Path.GetTempFileName();
             int wait_process = geting_all_crs_names2(db_path_default, temp_path); //geting_all_crs_names(mode, temp_path);
             List<string> names = File.ReadAllLines(temp_path).ToList();
-            //File.Delete(temp_path);
+            File.Delete(temp_path);
             return names;
         }
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
