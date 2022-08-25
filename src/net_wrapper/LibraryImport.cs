@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Globalization;
 
 namespace proj_wrapper
 {
@@ -62,10 +63,10 @@ namespace proj_wrapper
             List<string> file = File.ReadAllLines(temp_file_path).ToList();
             foreach (string str in file)
             {
-                double[] arr = str.Split(',').Select(a => Double.Parse(a)).ToArray();
+                double[] arr = str.Split(',').Select(a => Double.Parse(a, CultureInfo.InvariantCulture)).ToArray();
                 recalced.Add(arr);
             }
-            File.Delete(temp_file_path);
+            //File.Delete(temp_file_path);
             return recalced;
         }
         //getting cs info
@@ -132,6 +133,7 @@ namespace proj_wrapper
             string temp_path = Path.GetTempFileName();
             int wait_process = geting_all_crs_names2(db_path_default, temp_path); //geting_all_crs_names(mode, temp_path);
             List<string> names = File.ReadAllLines(temp_path).ToList();
+            names.Sort();
             File.Delete(temp_path);
             return names;
         }

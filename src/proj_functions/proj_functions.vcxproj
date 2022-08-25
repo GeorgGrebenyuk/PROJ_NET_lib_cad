@@ -130,23 +130,28 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\include;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\OSGeo4W\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sqlite3.lib;proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\OSGeo4W\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sqlite3_i.lib;proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcurl.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcurl.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libssl-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libssl-1_1-x64.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\proj_7_2.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\proj_7_2.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\sqlite3.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\sqlite3.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\tiff.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\tiff.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zlib.dll"</Command>
+      <Command>copy /y "C:\OSGeo4W\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
+copy /y "C:\OSGeo4W\bin\libcurl.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcurl.dll"
+copy /y "C:\OSGeo4W\bin\libssl-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libssl-1_1-x64.dll"
+copy /y "C:\OSGeo4W\bin\proj_9_0.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\proj_9_0.dll"
+copy /y "C:\OSGeo4W\bin\sqlite3.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\sqlite3.dll"
+copy /y "C:\OSGeo4W\bin\tiff.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\tiff.dll"
+copy /y "C:\OSGeo4W\bin\zlib.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zlib.dll"
+copy /y "C:\OSGeo4W\bin\jpeg62.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\jpeg62.dll"
+copy /y "C:\OSGeo4W\bin\Lerc.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\Lerc.dll"
+copy /y "C:\OSGeo4W\bin\liblzma.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\liblzma.dll"
+copy /y "C:\OSGeo4W\bin\zstd.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zstd.dll"
+copy /y "C:\OSGeo4W\bin\webp.dll"  "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\webp.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>if not exist "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib" mkdir "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib"</Command>
@@ -162,7 +167,7 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\include;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\OSGeo4W\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,17 +175,22 @@ copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>sqlite3.lib;proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\lib;G:\30_Coding\gis\proj_3dparty\sqlite3</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sqlite3_i.lib;proj.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\OSGeo4W\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libcurl.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcurl.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\libssl-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libssl-1_1-x64.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\proj_7_2.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\proj_7_2.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\sqlite3.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\sqlite3.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\tiff.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\tiff.dll"
-copy /y "G:\30_Coding\gis\release-1928-x64-dev\release-1928-x64\bin\zlib.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zlib.dll"</Command>
+      <Command>copy /y "C:\OSGeo4W\bin\libcrypto-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcrypto-1_1-x64.dll"
+copy /y "C:\OSGeo4W\bin\libcurl.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libcurl.dll"
+copy /y "C:\OSGeo4W\bin\libssl-1_1-x64.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\libssl-1_1-x64.dll"
+copy /y "C:\OSGeo4W\bin\proj_9_0.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\proj_9_0.dll"
+copy /y "C:\OSGeo4W\bin\sqlite3.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\sqlite3.dll"
+copy /y "C:\OSGeo4W\bin\tiff.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\tiff.dll"
+copy /y "C:\OSGeo4W\bin\zlib.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zlib.dll"
+copy /y "C:\OSGeo4W\bin\jpeg62.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\jpeg62.dll"
+copy /y "C:\OSGeo4W\bin\Lerc.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\Lerc.dll"
+copy /y "C:\OSGeo4W\bin\liblzma.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\liblzma.dll"
+copy /y "C:\OSGeo4W\bin\zstd.dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\zstd.dll"
+copy /y "C:\OSGeo4W\bin\webp.dll"  "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib\webp.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>if not exist "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib" mkdir "$(SolutionDir)bin\$(Platform)\$(Configuration)\proj_lib"</Command>

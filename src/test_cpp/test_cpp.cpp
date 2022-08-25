@@ -6,24 +6,22 @@
 
 int main()
 {
-    int source_cs = 100564;
-    int target_cs = 4326;
+    //const char* source_cs = "Ukraine-SK63-X_Zona1";
+    //OutString res{};
+    //int info_wkt = get_proj_as_proj((char* )source_cs, res, 0);
+    //std::cout << "code = " << info_wkt << " data = " << info_wkt;
    
-    double x = 114761.9900359072;
-    double y = 84173.3800804345;
+    //double x = 114761.9900359072;
+    //double y = 84173.3800804345;
 
-    point p = crs2crs_tranform(source_cs, target_cs, x, y, 0);
-    std::cout << "x= " << p.x << " y= " << p.y << " z= " << p.z;
-    std::cout << "End\n";
+    //point p = crs2crs_tranform(source_cs, target_cs, x, y, 0);
+    //std::cout << "x= " << p.x << " y= " << p.y << " z= " << p.z;
+    //std::cout << "End\n";
+    //const char* source = "Russia-MSK1964";
+    //const char* target = "WGS 84"; //EPSG:4326
+    //const char* f_path = "C:\\Users\\Georg\\Documents\\GitHub\\PROJ_NET_lib_cad\\examples\\points_4326-nerovnosti_945dc078-03c5-4990-be2f-b27ce73b1f36.txt";
+    //int wait_1 = crs2crs_tranform(source, target, f_path);
+
+    int wait_test = test_transform();
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using proj_wrapper;
+using System.Globalization;
 
 namespace test_net
 {
@@ -30,14 +31,14 @@ namespace test_net
         static void test_recalc()
         {
             DateTime start = DateTime.Now;
-            string source_cs = "WGS 84";
-            string target_cs = "Russia-MSK1964";
-            string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_4326-nerovnosti.txt");
+            string source_cs = "Russia-MSK1964";
+            string target_cs = "WGS 84 / UTM zone 36N";//WGS 84    WGS 84 / UTM zone 36N
+            string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_4326-nerovnosti_945dc078-03c5-4990-be2f-b27ce73b1f36.txt");
 
             List<double[]> source_points = new List<double[]>();
             foreach (string cs_row in cs_1)
             {
-                double[] coords_row = cs_row.Split(',').Select(a => Double.Parse(a)).ToArray();
+                double[] coords_row = cs_row.Split(',').Select(a => Double.Parse(a, CultureInfo.InvariantCulture)).ToArray();
 
                 source_points.Add(coords_row);
             }
@@ -56,21 +57,25 @@ namespace test_net
         }
         static void test_get_info()
         {
-            
-            //string source_cs = "Ukraine-SK63-X_Zona1";
-            //string info_wkt = lib.get_proj_as_wkt(source_cs, "3");
-            //Console.WriteLine("wkt= " + info_wkt);
-            
+
+            string source_cs = "Ukraine-SK63-X_Zona1";
+            string info_wkt = lib.get_proj_as_wkt(source_cs, "3");
+            Console.WriteLine("wkt= " + info_wkt);
+
             //string info_proj = lib.get_proj_as_proj(source_cs, "0");
             //Console.WriteLine("proj= " + info_proj);
-            
 
-            List<string> crs_all = lib.get_crs_names(15);
-            foreach (string cs in crs_all)
-            {
-                if (cs.Contains("Russia")) Console.WriteLine(cs);
 
-            }
+            //List<string> crs_all = lib.get_crs_names(15);
+            //foreach (string cs in crs_all)
+            //{
+            //    if (cs.Contains("Russia"))
+            //    {
+
+            //    }
+            //    Console.WriteLine(cs);
+
+            //}
 
         }
         static void create_new()
