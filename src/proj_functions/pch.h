@@ -12,7 +12,7 @@
 // Windows Header Files
 #include <windows.h>
 #include <stdio.h>
-#include <proj.h>
+#include <proj7\proj.h>
 
 
 #endif //PCH_H

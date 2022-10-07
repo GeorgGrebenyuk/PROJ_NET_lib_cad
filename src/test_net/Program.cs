@@ -17,8 +17,8 @@ namespace test_net
             DateTime t1 = DateTime.Now;
             lib = new LibraryImport();
 
-            test_recalc();
-            //test_get_info();
+            //test_recalc();
+            test_get_info();
             //create_new();
 
             lib.Dispose();
@@ -31,9 +31,9 @@ namespace test_net
         static void test_recalc()
         {
             DateTime start = DateTime.Now;
-            string source_cs = "Russia-MSK1964";
+            string source_cs = "Russia-MSK-1964";
             string target_cs = "WGS 84 / UTM zone 36N";//WGS 84    WGS 84 / UTM zone 36N
-            string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_4326-nerovnosti_945dc078-03c5-4990-be2f-b27ce73b1f36.txt");
+            string[] cs_1 = File.ReadAllLines(@"C:\Users\Georg\Documents\GitHub\PROJ_NET_lib_cad\examples\points_1964_1.csv");
 
             List<double[]> source_points = new List<double[]>();
             foreach (string cs_row in cs_1)
@@ -66,16 +66,16 @@ namespace test_net
             //Console.WriteLine("proj= " + info_proj);
 
 
-            //List<string> crs_all = lib.get_crs_names(15);
-            //foreach (string cs in crs_all)
-            //{
-            //    if (cs.Contains("Russia"))
-            //    {
+            List<string> crs_all = lib.get_crs_names();
+            foreach (string cs in crs_all)
+            {
+                if (cs.Contains("Russia"))
+                {
+                    Console.WriteLine(cs);
+                }
+                
 
-            //    }
-            //    Console.WriteLine(cs);
-
-            //}
+            }
 
         }
         static void create_new()

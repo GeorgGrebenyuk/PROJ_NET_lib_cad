@@ -46,12 +46,12 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_proj_as_proj(char* cs_name, OutString r
 }
 
 PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
-(int include_mode, char* file_path)
+(char* file_path)
 {
 	PJ_CONTEXT* C = proj_context_create();
 	PROJ_CRS_LIST_PARAMETERS* parameters = proj_get_crs_list_parameters_create();
-	PJ_TYPE type = (PJ_TYPE)include_mode; //(PJ_TYPE)include_mode;
-	//PJ_TYPE types[1] = { (PJ_TYPE)include_mode };
+	PJ_TYPE type = PJ_TYPE_PROJECTED_CRS; //(PJ_TYPE)include_mode;
+	PJ_TYPE types[1] = { type };
 	parameters->typesCount = 1;
 	parameters->types = &type;
 	int crs_counter = 0;
@@ -72,9 +72,6 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 		}
 		out.close();
 	}
-
-
-
 	proj_context_destroy(C);
 	proj_get_crs_list_parameters_destroy(parameters);
 	proj_crs_info_list_destroy(info_crs);

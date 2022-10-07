@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "..\\proj_functions\\declare_functions.h"
+#include"windows.h"
 
 int main()
 {
@@ -17,11 +18,14 @@ int main()
     //point p = crs2crs_tranform(source_cs, target_cs, x, y, 0);
     //std::cout << "x= " << p.x << " y= " << p.y << " z= " << p.z;
     //std::cout << "End\n";
-    //const char* source = "Russia-MSK1964";
-    //const char* target = "WGS 84"; //EPSG:4326
-    //const char* f_path = "C:\\Users\\Georg\\Documents\\GitHub\\PROJ_NET_lib_cad\\examples\\points_4326-nerovnosti_945dc078-03c5-4990-be2f-b27ce73b1f36.txt";
-    //int wait_1 = crs2crs_tranform(source, target, f_path);
+    const char* source = "Russia-MSK-1964";
+    const char* target = "WGS 84"; //EPSG:4326
+    //const char* f_path_old = "C:\\Users\\Georg\\Documents\\GitHub\\PROJ_NET_lib_cad\\examples\\points_1964_1 Ч копи€.csv";
+    
+    const char* f_path = "C:\\Users\\Georg\\Documents\\GitHub\\PROJ_NET_lib_cad\\examples\\points_1964_1.csv";
+    //int copy_status = CopyFile((LPCWSTR)f_path_old, (LPCWSTR)f_path, true);
+    int wait_1 = crs2crs_tranform(source, target, f_path);
 
-    int wait_test = test_transform();
+    //int wait_test = test_transform();
 }
 

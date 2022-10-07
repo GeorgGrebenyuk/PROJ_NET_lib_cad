@@ -6,7 +6,11 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-
+//Для точности
+#include <iomanip>
+//#include <limits>
+//#include <numbers>
+//#include <iostream>
 
 PROJ_LIB_FUNCTIONS_API int __stdcall crs2crs_tranform(const char* source_cs_name, const char* target_cs_name, const char* file_path)
 {
@@ -38,10 +42,12 @@ PROJ_LIB_FUNCTIONS_API int __stdcall crs2crs_tranform(const char* source_cs_name
 
 	C = proj_context_create();
 	PJ* P_source = proj_create(C, source_cs_name);
+	std::cout << "P_source = " << P_source << std::endl;
 	PJ* P_target = proj_create(C, target_cs_name);
+	std::cout << "P_target = " << P_target << std::endl;
 
-	const char* const options[] = { "ACCURACY= 8", nullptr };
-	PJ_AREA* area = proj_area_create();
+	//const char* const options[] = { "ACCURACY= 1.0", nullptr };
+	//PJ_AREA* area = proj_area_create();
 	
 	PJ* P_convert = proj_create_crs_to_crs_from_pj(C, P_source, P_target, NULL, NULL);
 	
@@ -53,15 +59,19 @@ PROJ_LIB_FUNCTIONS_API int __stdcall crs2crs_tranform(const char* source_cs_name
 	std::ofstream out;
 	out.open(file_path);
 	//std::cout << "start recalc" << std::endl;
+
+
 	for (auto source_point : points_row)
 	{
-		a = proj_coord(source_point[0], source_point[1], source_point[2], 0);
-		std::cout << "coord row= " << source_point[0] << " " << source_point[1] << " " << std::endl;
+		a = proj_coord(source_point[0], source_point[1], source_point[2], 0); //инвертированный x,y
+		//std::cout << "coord row (geodetic xy)= " << source_point[1] << " " << source_point[0] << " " << std::endl;
 		b = proj_trans(P_convert, PJ_FWD, a);
+
+		
 		std::stringstream ss;
-		ss << b.xyz.x << "," << b.xyz.y << "," << b.xyz.z;
+		ss << std::fixed << std::setprecision(14) << b.xyz.x << "," << b.xyz.y << "," << b.xyz.z;
 		out << ss.str().c_str() << std::endl;
-		//std::cout << "coord = " << b.enu.e << " " << b.enu.n << " " << std::endl;
+		std::cout << "coord = " << ss.str().c_str() << std::endl;
 		//points_end.push_back(ss.str().c_str());
 		ss.clear();
 	}
@@ -73,7 +83,6 @@ PROJ_LIB_FUNCTIONS_API int __stdcall crs2crs_tranform(const char* source_cs_name
 	//}
 	out.close();
 
-	proj_area_destroy(area);
 	proj_destroy(P_convert);
 	proj_destroy(P_source);
 	proj_destroy(P_target);
