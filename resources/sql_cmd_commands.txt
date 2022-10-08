@@ -1,0 +1,8 @@
+C:\OSGeo4W\bin\sqlite3.exe
+
+.open C:/Users/Georg/AppData/Local/proj/proj.db
+.schema projected_crs
+.read C:/Users/Georg/Documents/GitHub/PROJ_NET_lib_cad/resources/update_querry.sql
+
+
+.open C:/Users/Georg/AppData/Roaming/Nanosoft/nanoCAD x64 22.0/imppointslib/geoids/proj.db
