@@ -24,7 +24,11 @@ int main()
     
     const char* f_path = "C:\\Users\\Georg\\Documents\\GitHub\\PROJ_NET_lib_cad\\examples\\points_1964_1.csv";
     //int copy_status = CopyFile((LPCWSTR)f_path_old, (LPCWSTR)f_path, true);
-    int wait_1 = crs2crs_tranform(source, target, f_path);
+    //int wait_1 = crs2crs_tranform(source, target, f_path);
+
+    //const char* path = "C:\\Users\\Georg\\AppData\\Local\\Temp\\tmpFD8F.tmp";
+    //int wait_get_crs = get_all_crs_names((char*)"C:\\Users\\Georg\\AppData\\Local\\Temp\\tmpFD8F.tmp");//
+    int wait_get_crs2 = get_all_crs_names((char*)"C:\\Users\\Georg\\AppData\\Local\\Temp\\tmpFD8F.tmp");
 
     //int wait_test = test_transform();
 }

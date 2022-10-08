@@ -73,8 +73,6 @@ namespace test_net
                 {
                     Console.WriteLine(cs);
                 }
-                
-
             }
 
         }
