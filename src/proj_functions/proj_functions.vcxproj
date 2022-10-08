@@ -195,13 +195,11 @@ copy /y "E:\30_Coding\SDK\release-1928-x64-dev\release-1928-x64\bin\sqlite3.dll"
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="aux_functions.hpp" />
     <ClInclude Include="declare_functions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="aux_functions.cpp" />
     <ClCompile Include="crs_transform.cpp" />
     <ClCompile Include="db_tools.cpp" />
     <ClCompile Include="dllmain.cpp" />
