@@ -5,11 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <sqlite3.h>
-//char** get_all_geodetic_crs()
-//{
-//
-//}
+
 PROJ_LIB_FUNCTIONS_API int __stdcall get_proj_as_wkt(char* cs_name, OutString result, int type)
 {
 	int result_status = 0;
@@ -49,56 +45,51 @@ PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names
 (char* file_path)
 {
 	PJ_CONTEXT* C = proj_context_create();
-	PROJ_CRS_LIST_PARAMETERS* parameters = proj_get_crs_list_parameters_create();
-	PJ_TYPE type = PJ_TYPE_PROJECTED_CRS; //(PJ_TYPE)include_mode;
-	PJ_TYPE types[1] = { type };
-	parameters->typesCount = 1;
-	parameters->types = &type;
-	int crs_counter = 0;
-	PROJ_CRS_INFO** info_crs = proj_get_crs_info_list_from_database(C, NULL, parameters, &crs_counter);
-	//crs_counter += 100;
-	std::vector<char*> names;
-	if (info_crs != NULL)
+	/*
+	Поскольку функция proj_get_crs_info_list_from_database НЕ ВОВЗРАЩАЕТ добавленные 
+	Пользователем параметры (почему, НЕ ПОНИМАЮ), действуем через получение всех кодов СК
+	и уже по ним получаем из БД информацию о проекции. Тратится некоторое время (до 5 секунд) для парсинга всей базы.
+	Видится оптимальным ввод ограничений на категорию запроса - т.к. нам железно "хватит" только EPSG.
+	
+	*/
+	PROJ_STRING_LIST auths_names = proj_get_authorities_from_database(C);
+	std::vector<PJ_TYPE> types{ PJ_TYPE_PROJECTED_CRS, PJ_TYPE_GEODETIC_CRS };
+	std::ofstream out;
+	out.open(file_path);
+
+	if (auths_names)
 	{
-		for (int i = 0; i < crs_counter; i++)
+		const char** auths_names_temp = const_cast<const char**>(auths_names);
+		//Это как раз "спефификации" определений - типа EPSG и прочих
+		while (*auths_names_temp)
 		{
-			names.push_back(info_crs[i]->name);
+			//Тут мы получаем определения из projected_crs, geodetic_crs
+			for (PJ_TYPE type : types)
+			{
+				PROJ_STRING_LIST info_codes = proj_get_codes_from_database(C, *auths_names_temp, type, 0);
+				if (info_codes != NULL)
+				{
+					const char** pItem = const_cast<const char**>(info_codes);
+					while (*pItem)
+					{
+						PJ* existed_proj = proj_create_from_database(C, *auths_names_temp, *pItem, PJ_CATEGORY_CRS, 0, NULL);
+						if (existed_proj)
+						{
+							//std::cout << proj_get_name(existed_proj) << std::endl;
+							if (out.is_open()) { out << proj_get_name(existed_proj) << std::endl; }
+						}
+						pItem++;
+						proj_destroy(existed_proj);
+					}
+				}
+				proj_string_list_destroy(info_codes);
+			}
+			auths_names_temp++;
 		}
-		std::ofstream out;
-		out.open(file_path);
-		if (out.is_open())
-		{
-			for (char* name : names) { out << name << std::endl; }
-		}
-		out.close();
 	}
+	proj_string_list_destroy(auths_names);
+	out.close();
 	proj_context_destroy(C);
-	proj_get_crs_list_parameters_destroy(parameters);
-	proj_crs_info_list_destroy(info_crs);
-	return 1;
-}
-PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names2(char* db_path, char* file_path)
-{
-	//std::vector<char*> names;
-	sqlite3* db;
-	sqlite3_stmt* stmt;
-	if (sqlite3_open(db_path, &db) == SQLITE_OK)
-	{
-		std::ofstream out;
-		out.open(file_path);
-		sqlite3_prepare(db, "SELECT name from crs_view;", -1, &stmt, NULL);//preparing the statement
-		sqlite3_step(stmt);//executing the statement
-		char* str = (char*)sqlite3_column_text(stmt, 0);
-		while (sqlite3_column_text(stmt, 0))
-		{
-			auto el = (char*)sqlite3_column_text(stmt, 0);
-			out << el << std::endl;
-			sqlite3_step(stmt);
-		
-		}
-		sqlite3_close(db);
-		out.close();
-	}
 	return 1;
 }
 PROJ_LIB_FUNCTIONS_API int __stdcall create_crs_by_wkt(char* wkt, OutString errors)

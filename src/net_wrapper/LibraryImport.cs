@@ -120,9 +120,6 @@ namespace proj_wrapper
         [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
         EntryPoint = "get_all_crs_names")]
         private static extern int geting_all_crs_names(string file_path);
-        [DllImport("proj_lib\\proj_functions_x64", CallingConvention = CallingConvention.StdCall, ExactSpelling = false,
-        EntryPoint = "get_all_crs_names2")]
-        private static extern int geting_all_crs_names2(string dp_path, string file_path);
         /// <summary>
         /// Получение наименований всех систем координат в базе данных
         /// </summary>
@@ -131,7 +128,7 @@ namespace proj_wrapper
         public List<string> get_crs_names()
         {
             string temp_path = Path.GetTempFileName();
-            int wait_process = geting_all_crs_names2(db_path_default, temp_path); //geting_all_crs_names(mode, temp_path);
+            int wait_process = geting_all_crs_names(temp_path); //geting_all_crs_names(mode, temp_path);
             List<string> names = File.ReadAllLines(temp_path).ToList();
             names.Sort();
             //File.Delete(temp_path);
@@ -155,16 +152,6 @@ namespace proj_wrapper
             if (result == 1) return true;
             else return false;
         }
-
-
-
-
-
-
-
-
-
-
         public void Dispose()
         {
             Dispose(true);
