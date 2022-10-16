@@ -41,7 +41,7 @@ extern "C"
 
 	PROJ_LIB_FUNCTIONS_API int __stdcall get_all_crs_names (char* file_path);
 	PROJ_LIB_FUNCTIONS_API int __stdcall create_crs_by_wkt(char* wkt, OutString errors);
-	PROJ_LIB_FUNCTIONS_API int __stdcall test_transform ();
+	///PROJ_LIB_FUNCTIONS_API int __stdcall test_transform ();
 
 }
 
