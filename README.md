@@ -48,3 +48,4 @@ https://zen.yandex.ru/video/watch/628d3a06c0c8630b7c954c9a
 ## Articles about that (Russian only)
 1. https://zen.yandex.ru/media/id/5d0dba97ecd5cf00afaf2938/627a2666e71a825dbd453337
 2. https://zen.yandex.ru/media/id/5d0dba97ecd5cf00afaf2938/628c917fa70c7938bb24560f
+3. PDF in attachments https://github.com/GeorgGrebenyuk/PROJ_NET_lib_cad/releases/tag/docs
